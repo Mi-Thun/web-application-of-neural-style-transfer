@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <title>Document</title>
+</head>
+<style>
+    [type=radio] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* IMAGE STYLES */
+    [type=radio]+img:hover {
+        cursor: pointer;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.555);
+    }
+
+    /* CHECKED STYLES */
+    [type=radio]:checked+img {
+        outline: 4px solid #f00;
+    }
+
+    hr {
+        border-top: 3px solid rgb(0, 0, 0);
+        background-color: white;
+        margin-top: 30px;
+    }
+</style> 
+<body>
+    
+    <div class="container">
+        <nav class="nav nav-pills flex-column flex-sm-row" style="margin-top:10px">
+            <a
+              class="flex-sm-fill text-sm-center nav-link"
+              aria-current="page"
+              href="{% url 'home' %}"
+              >Home</a
+            >
+            <a class="flex-sm-fill text-sm-center  nav-link active" href="{% url 'orpage' %}"
+              >Or Page</a
+            >
+          </nav>
+        <h1 class="text-center alert" style="background-color: rgb(163, 153, 153);margin-top: 10px;">Neural Style
+            Transfer</h1>
+        <!-- Radio Images -->
+        <form method="post">
+            {% csrf_token %}
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">
+                    Choose your Style Image:
+                </div>
+                <div class="row" style="margin: 10px 10px 10px 10px;">
+                    {% for i in test_img %}
+                    <div class="col-md">
+                        <div class="thumbnail">
+                             <label>
+                                <input type="radio" name="test1" value="{{i}}" checked>
+                                <img src="{{i}}" alt="No image" name="test1"  class="rounded float-left" style="width:150px;height:150px;margin-top: 5px;">
+                            </label>
+                         </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header">
+                    Choose your Source Image:
+                </div>
+                <div class="row" style="margin: 10px 10px 10px 10px;">
+                    {% for ix in test_img %}
+                    <div class="col-md">
+                        <div class="thumbnail">
+                            <label>
+                                <input type="radio" name="test2" value="{{ix}}" checked>
+                                <img src="{{ix}}" alt="no image" name="test2"  class="rounded float-left"
+                                    style="width:150px;height:150px;margin-top: 5px;">
+                            </label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <input type="submit" value="Generate Image" class="btn btn-outline-primary" style="width: 100%; margin-top: 10px;"></input>
+        </form>
+        <!-- resutl -->
+        <div class="card" style="margin-top: 10px">
+            <div class="card-header">Result Images:</div>
+            <div class="align-self-center">
+                {% if img is not None %}
+                <div class="thumbnail">
+                    <a href="{{ img }}">
+                        <img src="{{ img }}" alt="No image" class="rounded float-left" style="
+                  width: 50%;
+                  margin-left: 200px;
+                  margin-top: 10px;
+                  margin-bottom: 10px;
+                " />
+                    </a>
+                </div>
+                {% else %}
+                <p style="color: rgb(255, 0, 0); font-size: larger; margin: 50px">
+                    No Images
+                </p>
+                {% endif %}
+            </div>
+        </div>
+        <button onclick="clearImage()" class="btn btn-outline-danger" style="width: 100%; margin-top: 10px;margin-bottom: 80px;">
+            <a style="text-decoration: none; color: rgb(0, 0, 0);display: block;" href="{% url 'clear2' %}">Reset</a>
+        </button>
+    </div>
+</body>
+</html>
