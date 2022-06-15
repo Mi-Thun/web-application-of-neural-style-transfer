@@ -7,4 +7,4 @@ This project explores methods for artistic style transfer based on convolutional
  - tensorflow
 
 # Project Report
-[Neural Style Transfer](https://drive.google.com/file/d/1LS8k6ZOf4s9ZcvwGAQWe5IP21sUQfOur/view?usp=sharing)
+[Neural-Style-Transfer.pdf](https://drive.google.com/file/d/1EH2NzDySAWDIBsAQz6QIR8B9eJfoPf3R/view?usp=sharing)
